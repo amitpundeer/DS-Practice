@@ -5,6 +5,32 @@
 
 using namespace std;
 
+
+//TC: O(n)
+//SC: O(n)
+int maxDifference3(int arr[], int size)
+{
+    if(size<=1) return 0;
+    
+    int diff[size-1];
+    for(int i=0; i<size-1; i++)
+    {
+        diff[i] = arr[i+1] - arr[i];
+    }
+    
+    int maxDiff=diff[0];
+    for(int i=1; i<size-1; i++)
+    {
+        if(diff[i-1] > 0)
+            diff[i] += diff[i-1];
+        
+        if(diff[i] > maxDiff) maxDiff = diff[i];
+    }
+    
+    return maxDiff;
+}
+
+
 //TC: O(n)
 //SC: O(1)
 int maxDifference2(int arr[], int size)
@@ -47,6 +73,6 @@ int main() {
     
     cout<<maxDifference(arr, size)<<endl;
     cout<<maxDifference2(arr, size)<<endl;
-    
+    cout<<maxDifference3(arr, size)<<endl;
     return 0;
 }
